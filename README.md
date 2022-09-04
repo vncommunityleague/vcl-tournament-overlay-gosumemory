@@ -3,6 +3,8 @@
 This overlay is helpful for those that likes the look of Lazer overlay, but doesn't want to go through the complicated setup steps.
 It only include Gameplay & Mappool scene, but we might add winner scene in the future if we even care.
 
+[**How the overlay looks like (with a bit of CSS modification)**](https://www.twitch.tv/videos/1445278730?collection=vyL2iPlp4xYysw&t=00h11m56s)
+
 ## Basic usage guide:
 - MUST HAVE GOSUMEMORY INSTALLED (duh)
 - Download this repo as .zip, and extract to `static` folder of Gosumemory
