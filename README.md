@@ -19,8 +19,8 @@ It only include Gameplay & Mappool scene, but we might add winner scene in the f
 
 ## OBS stuff
 - Add a browser source in OBS, size `2420x1080`
-- Picks: Right click for P1, left click for P2
-- Bans: Shift + Right click for P1, Shift + Left click for P2
+- Picks: Left click for P1, right click for P2
+- Bans: Shift + Left click for P1, Shift + Right click for P2
 - Reset map status: Ctrl + Click
 - Same as lazer, bans must be done manually, and you will also have to select who will have first pick
 
