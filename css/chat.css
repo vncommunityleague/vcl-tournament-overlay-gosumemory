@@ -1,0 +1,90 @@
+#chats {
+	opacity: 1;
+	background: var(--chat-color);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 930px;
+	height: 200px;
+	margin: 15px;
+	border-radius: 10px;
+	box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.5);
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 18px;
+	font-family: "BeVietnamPro", monospace;
+	transition: ease-in-out 500ms;
+}
+
+.chat {
+	display: flex;
+	text-align: left;
+}
+
+.chatTime {
+	width: 5%;
+	color: silver;
+	margin-right: 20px;
+	margin-left: 20px;
+}
+
+.wholeChat {
+	width: 95%;
+	display: flex;
+}
+
+.chatName {
+	color: white;
+	white-space: nowrap;
+	width: max-content;
+}
+
+.chatText {
+	white-space: normal;
+	word-wrap: break-word;
+	overflow: hidden;
+}
+
+.unknown {
+	color: yellow;
+}
+
+.bot {
+	color: #ff66aa;
+}
+
+.left {
+	color: #1fd0ed;
+}
+
+.right {
+	color: #ed1855;
+}
+
+/*Scrollbar*/
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+	margin-top: 25px;
+	margin-bottom: 25px;
+	visibility: 0;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+	background: none;
+	border-radius: 10px;
+}
+
+.text {
+	display: flex;
+	justify-content: center;
+}

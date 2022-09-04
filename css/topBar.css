@@ -1,0 +1,149 @@
+/* ==== MAIN CONTAINER ==== */
+
+#teamName {
+	position: absolute;
+	width: 100%;
+	height: 120px;
+	/* background-color: #15151e; */
+	top: 0px;
+	/* box-shadow: 0 -5px 10px 0 rgba(0, 0, 0, 0.20); */
+}
+
+/* ==== NAME AND SCORE CONTAINER ==== */
+
+#nameScoreContainer {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin-top: auto;
+	margin-bottom: auto;
+	width: 100%;
+	height: 85px;
+}
+
+/* ==== TEAM NAME ==== */
+.teamName {
+	position: absolute;
+	font-family: BeVietnamPro;
+	bottom: 30px;
+	padding: 5px 0;
+	height: 50px;
+	line-height: 50px;
+	font-size: 30px;
+	transition: ease-in-out 500ms;
+	color: var(--text-color);
+	border-radius: 25px;
+}
+
+#teamLeftName.teamName {
+	text-align: left;
+	left: 150px;
+	/* background-color: #de3950; */
+}
+
+#teamRightName.teamName {
+	text-align: right;
+	right: 150px;
+	/* background-color: #2982e3; */
+}
+
+/* ==== AVATAR ==== */
+
+.avatar {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	border-radius: 10px;
+	margin-top: auto;
+	margin-bottom: auto;
+	top: 0;
+	bottom: 0;
+	background-size: 100%;
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+#avatarLeft {
+	left: 10px;
+}
+
+#avatarRight {
+	right: 10px;
+}
+
+.avatar::after {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin-top: auto;
+	margin-bottom: auto;
+
+	width: 0px;
+	height: 0px;
+	content: "";
+	padding: 30px 5px;
+	/* margin: 10px; */
+
+	border-radius: 5px;
+}
+
+#avatarLeft.avatar::after{
+	right: -25px;
+	background-color: var(--left-avatar-line-color);
+	box-shadow: 0 0 10px 0 var(--left-avatar-line-color);
+}
+
+#avatarRight.avatar::after{
+	left: -25px;
+	background-color: var(--right-avatar-line-color);
+	box-shadow: 0 0 10px 0 var(--right-avatar-line-color);
+}
+
+.background--light {
+	color: #161616;
+}
+
+.background--dark {
+	color: #fff;
+}
+
+/* ==== MATCH SCORE ===== */
+
+#scoreContainerLeft,
+#scoreContainerRight {
+	position: absolute;
+	display: flex;
+	height: 15px;
+	top: 60px;
+	/* padding-top: 5px;
+    padding-bottom: 5px; */
+	transition: ease-in-out 100ms;
+}
+
+#scoreContainerLeft {
+	justify-content: flex-end;
+	left: 150px;
+}
+
+#scoreContainerRight {
+	/* justify-content: flex-end; */
+	right: 150px;
+}
+
+.scoreLeft,
+.scoreRight {
+	width: 40px;
+	height: 10px;
+	background-color: #fff;
+	transition: ease-in-out 100ms;
+	border-radius: 5px;
+}
+
+.scoreLeft {
+	flex-wrap: wrap-reverse;
+	margin-right: 10px;
+}
+
+.scoreRight {
+	/* flex-wrap: wrap-reverse; */
+	margin-left: 10px;
+}

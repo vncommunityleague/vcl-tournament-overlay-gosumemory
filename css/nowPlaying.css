@@ -1,0 +1,106 @@
+.nowPlayingInMatch {
+	left: 0;
+	bottom: 0;
+}
+
+.nowPlayingWaiting {
+	right: 0;
+	bottom: 120px;
+}
+
+.hidden {
+	opacity: 0;
+}
+
+.shown {
+	opacity: 1;
+}
+
+#nowPlayingContainer {
+	position: absolute;
+	width: 930px;
+	margin: 15px;
+	height: 90px;
+	background-color: black;
+	background-size: cover;
+	background-position: center center;
+	border-radius: 10px;
+	box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.5);
+	z-index: 0;
+	transition: ease-in-out 500ms;
+
+	display: flex;
+	justify-content: flex-start;
+	align-content: center;
+	flex-wrap: wrap;
+}
+
+#overlay {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+.mapInfo {
+	/* position: absolute; */
+	/* left: 0; */
+	/* right: 0; */
+	/* margin-left: auto; */
+	/* margin-right: auto; */
+	font-family: BeVietnamPro;
+	font-weight: 0;
+	text-align: left;
+	user-select: none;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-left: 2%;
+	margin-right: 2%;
+	z-index: 0;
+	font-size: 20px;
+	text-shadow: 0 5px 10px black;
+}
+
+#mapName {
+	font-weight: 700;
+	width: 96%;
+}
+
+#mapDifficulty,
+#mapCreator {
+	/* width: 46%; */
+	max-width: 46%;
+}
+
+#mapStat {
+	position: absolute;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+	right: 0;
+	bottom: 0px;
+	width: 930px;
+	height: 90px;
+	margin: 15px;
+	text-align: left;
+	user-select: none;
+	font-family: BeVietnamPro;
+	font-size: 20px;
+	line-height: 30px;
+	color: var(--text-color);
+	text-shadow: 0 3px 5px black;
+	/* border-radius: 10px;
+	background-color: #15151e;
+	box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.5); */
+	transition: ease-in-out 500ms;
+}
+
+#mapIndex,
+#mapTime {
+	margin-left: 2%;
+	margin-right: 2%;
+	width: 46%;
+}

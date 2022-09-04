@@ -1,0 +1,61 @@
+#bottomBar {
+    position: absolute;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    top: 840px;
+    left: 1920px;
+    width: 500px;
+    height: 240px;
+    background-color: #15151e;
+}
+
+.pickButton {
+    width: 300px;
+    height: 50px;
+    margin: 5px;
+    line-height: 50px;
+    text-align: center;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    font-family: BeVietnamPro;
+    font-size: 25px;
+    font-weight: 700;
+    background-color: #2a2a3a;
+    border-radius: 10px;
+    transition: ease-in-out 200ms;
+}
+
+.pickButton:hover {
+    transform: translateY(-3px);
+}
+
+#refreshiFrame {
+    background-color: #de3950;
+}
+
+.mappoolPicker {
+    position: absolute;
+    top: 120px;
+    width: 2420px;
+    height: 720px;
+    transition: ease-in-out 500ms;
+    clip-path: inset(0px 0px 0px 1920px);
+}
+
+#playArea {
+    position: absolute;
+    width: 1920px;
+    height: 1080px;
+    top: 0px;
+    background-image: var(--bg2);
+    background-size: cover;
+    background-repeat: no-repeat;
+    clip-path: inset(0px 0px 0px 1920px);
+    transition: ease-in-out 500ms;
+    /* filter: brightness(2); */
+    /* z-index: -1; */
+}

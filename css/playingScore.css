@@ -1,0 +1,67 @@
+.deltaBar {
+	position: absolute;
+	bottom: 230px;
+	height: 10px;
+	/* background-color: white; */
+	transition: ease-in-out 200ms;
+}
+
+#deltaBarL {
+	background-color: var(--left-score-bar-color);
+	right: 50%;
+	transform-origin: top right;
+}
+
+#deltaBarR {
+	background-color: var(--right-score-bar-color);
+	left: 50%;
+	transform-origin: top left;
+}
+
+#playingScoreContainer {
+	position: absolute;
+	bottom: 120px;
+	width: 100%;
+	height: 120px;
+}
+
+.normalScore {
+	position: absolute;
+	bottom: 0px;
+	height: 100%;
+	/* padding-right: auto;
+    padding-left: auto; */
+	margin: 10px;
+	font-family: BeVietnamPro;
+	font-variant-numeric: tabular-nums lining-nums;
+	line-height: 120px;
+	font-size: 50px;
+	transition: ease-in-out 200ms;
+}
+
+.leadingScore {
+	position: absolute;
+	bottom: 0px;
+	height: 100%;
+	/* padding-right: auto;
+    padding-left: auto; */
+	margin: 10px;
+	font-family: BeVietnamPro;
+	font-variant-numeric: tabular-nums lining-nums;
+	line-height: 120px;
+	font-size: 60px;
+	font-weight: 700;
+	transition: ease-in-out 200ms;
+}
+
+#playScoreLeft {
+	color: var(--text-color);
+	text-align: right;
+	right: 50%;
+}
+
+#playScoreRight {
+	color: var(--text-color);
+	text-align: left;
+	left: 50%;
+}
