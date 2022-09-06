@@ -1,4 +1,4 @@
-# VCL Tournament Overlay - Lazer edition by TryZ
+# VCL Tournament Overlay - Lazer edition by Try-Z
 
 This overlay is helpful for those that likes the look of Lazer overlay, but doesn't want to go through the complicated setup steps.
 It only include Gameplay & Mappool scene, but we might add winner scene in the future if we even care.
