@@ -60,17 +60,19 @@ socket.onopen = () => {
 };
 
 let animation = {
-    playScoreLeft: new CountUp("playScoreLeft", 0, 0, 0, 0.2, {
+    playScoreLeft: new CountUp("playScoreLeft", 0, 0, 2, 0.2, {
         useEasing: true,
         useGrouping: true,
         separator: " ",
         decimal: ".",
+        suffix: "%"
     }),
-    playScoreRight: new CountUp("playScoreRight", 0, 0, 0, 0.2, {
+    playScoreRight: new CountUp("playScoreRight", 0, 0, 2, 0.2, {
         useEasing: true,
         useGrouping: true,
         separator: " ",
         decimal: ".",
+        suffix: "%"
     }),
 };
 
@@ -93,6 +95,11 @@ let tempSR, tempCS, tempAR, tempOD, tempHP, tempLength, tempBPM;
 let scoreLeftTemp, scoreRightTemp;
 
 let playScoreLeftTemp, playScoreRightTemp, leftOffset, rightOffset, deltaScore;
+
+// let accuracy = {
+//     left: 0,
+//     right: 0
+// }
 
 let teamNameLeftTemp, teamNameRightTemp, team1, team2;
 
@@ -308,12 +315,12 @@ socket.onmessage = (event) => {
     if (scoreVisibleTemp) {
         if (tournamentDebugger === 0) {
             teamSize = data.tourney.ipcClients.length / 2;
-            playScoreLeftTemp = data.tourney.manager.gameplay.score.left;
-            playScoreRightTemp = data.tourney.manager.gameplay.score.right;
-            maximumDelta = teamSize * 1000000;
+            playScoreLeftTemp = data.tourney.ipcClients[0].gameplay.accuracy;
+            playScoreRightTemp = data.tourney.ipcClients[1].gameplay.accuracy;
+            maximumDelta = teamSize * 100;
         } else {
             teamSize = 1;
-            maximumDelta = 1000000;
+            maximumDelta = 100;
         }
 
         deltaScore = playScoreRightTemp - playScoreLeftTemp;
