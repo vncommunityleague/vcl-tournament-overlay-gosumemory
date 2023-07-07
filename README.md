@@ -23,7 +23,9 @@ For the time being, only Gameplay and Mappool scene is included.
 - For P1/P2 score, change hex code in `index.js` (Line `253` for P1 and line `266` for P2)
 
 ## Overlay interaction (in OBS)
-- Add a browser source in OBS, size `2420x1080`
+- Add a browser source in OBS:
+	- size: `2420x1080`
+ 	- URL: `127.0.0.1:24050/vcl-tournament-overlay` 
 - Below the preview, you should see an `Interact` button. Click on that to interact with the overlay.
 - Picks: Left click for P1, right click for P2
 - Bans: Shift + Left click for P1, Shift + Right click for P2
