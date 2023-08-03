@@ -1,6 +1,3 @@
-
-
-
 # VCL Tournament Overlay - Lazer edition by Try-Z
 
 This overlay is helpful for those that likes the look of Lazer overlay, but doesn't want to go through the complicated setup steps. As a bonus, this overlay has support for Accuracy win condition, which the default Lazer client cannot do as of the time this repo is updated.
@@ -10,7 +7,6 @@ For the time being, only Gameplay and Mappool scene is included.
 
 ## Setup guide:
 - Install Gosumemory (duh)
-	 - As of now, there are 2 different versions to use. If you are using this overlay in score mode, the latest release of Gosumemory works just fine. **If you are using accuracy mode, use [THIS VERSION](baka-ero.kotworks.cyou/new/gosumemory_b20230313.exe) instead.** (put the new `.exe` in the same directory as your current Gosumemory install. **DO NOT** replace if you plan on using score mode)
 - Download this repo as .zip and extract to `static` folder of Gosumemory
 - Rename either `index_acc.js` or `index_score.js` to `index.js`, depends on which win condition you are using.
 - Put your APIv1 key in `api.json`
