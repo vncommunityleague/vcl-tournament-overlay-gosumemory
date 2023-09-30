@@ -1,18 +1,3 @@
-const file = [];
-let api;
-async function getAPI() {
-    try {
-        const jsonData = await $.getJSON("api.json");
-        jsonData.map((num) => {
-            file.push(num);
-        });
-        api = file[0].api;
-    } catch (error) {
-        console.error("Could not read JSON file", error);
-    }
-}
-getAPI();
-
 // const queryString = window.location.search;
 // const urlParams = new URLSearchParams(queryString);
 
@@ -118,14 +103,8 @@ let integratedMappool = 0;
 let tempIntegratedMappool;
 
 toMins = (time) => {
-    let minutes =
-        time.getUTCMinutes() >= 10
-            ? time.getUTCMinutes()
-            : "0" + time.getUTCMinutes();
-    let seconds =
-        time.getUTCSeconds() >= 10
-            ? time.getUTCSeconds()
-            : "0" + time.getUTCSeconds();
+    let minutes = time.getUTCMinutes() >= 10 ? time.getUTCMinutes() : "0" + time.getUTCMinutes();
+    let seconds = time.getUTCSeconds() >= 10 ? time.getUTCSeconds() : "0" + time.getUTCSeconds();
     return minutes + ":" + seconds;
 };
 
@@ -143,8 +122,7 @@ socket.onmessage = (event) => {
         tempTournamentDebugger !== tournamentDebugger
     ) {
         tempTournamentDebugger = tournamentDebugger;
-        if (tournamentDebugger === 0)
-            scoreVisibleTemp = data.tourney.manager.bools.scoreVisible;
+        if (tournamentDebugger === 0) scoreVisibleTemp = data.tourney.manager.bools.scoreVisible;
         else scoreVisibleTemp = true;
         tempOverlayState = overlayState;
         if (scoreVisibleTemp === true) {
@@ -185,20 +163,10 @@ socket.onmessage = (event) => {
     }
     if (tempImg !== data.menu.bm.path.full) {
         tempImg = data.menu.bm.path.full;
-        data.menu.bm.path.full = data.menu.bm.path.full
-            .replace(/#/g, "%23")
-            .replace(/%/g, "%25")
-            .replace(/\\/g, "/")
-            .replace(/'/g, "%27");
-        nowPlayingContainer.style.backgroundImage = `url('http://127.0.0.1:24050/Songs/${
-            data.menu.bm.path.full
-        }?a=${Math.random(10000)}')`;
+        data.menu.bm.path.full = data.menu.bm.path.full.replace(/#/g, "%23").replace(/%/g, "%25").replace(/\\/g, "/").replace(/'/g, "%27");
+        nowPlayingContainer.style.backgroundImage = `url('http://127.0.0.1:24050/Songs/${data.menu.bm.path.full}?a=${Math.random(10000)}')`;
     }
-    if (
-        tempMapID !== data.menu.bm.id ||
-        tempSR !== data.menu.bm.stats.fullSR ||
-        tempLength !== data.menu.bm.time.full
-    ) {
+    if (tempMapID !== data.menu.bm.id || tempSR !== data.menu.bm.stats.fullSR || tempLength !== data.menu.bm.time.full) {
         tempMapID = data.menu.bm.id;
         tempMapArtist = data.menu.bm.metadata.artist;
         tempMapTitle = data.menu.bm.metadata.title;
@@ -215,8 +183,7 @@ socket.onmessage = (event) => {
         convertedLength = toMins(convertedLength);
 
         tempBPM = data.menu.bm.stats.BPM.max;
-        if (data.menu.bm.stats.BPM.max !== data.menu.bm.stats.BPM.min)
-            tempBPM = `${data.menu.bm.stats.BPM.min} - ${data.menu.bm.stats.BPM.max}`;
+        if (data.menu.bm.stats.BPM.max !== data.menu.bm.stats.BPM.min) tempBPM = `${data.menu.bm.stats.BPM.min} - ${data.menu.bm.stats.BPM.max}`;
 
         mapName.innerHTML = tempMapArtist + " - " + tempMapTitle;
         mapDifficulty.innerHTML = `Difficulty: <span style="font-weight: 700">${tempMapDiff}</span>`;
@@ -261,26 +228,15 @@ socket.onmessage = (event) => {
         scoreRightTemp = data.tourney.manager.stars.right;
         for (var i = 0; i < Math.ceil(bestOfTemp / 2); i++) {
             if (i < scoreRightTemp) {
-                scoreRight[
-                    Math.ceil(bestOfTemp / 2) - 1 - i
-                ].style.backgroundColor = "#fff";
+                scoreRight[Math.ceil(bestOfTemp / 2) - 1 - i].style.backgroundColor = "#fff";
             } else if (i >= scoreRightTemp) {
-                scoreRight[
-                    Math.ceil(bestOfTemp / 2) - 1 - i
-                ].style.backgroundColor = "rgba(255 255 255 / .5)";
+                scoreRight[Math.ceil(bestOfTemp / 2) - 1 - i].style.backgroundColor = "rgba(255 255 255 / .5)";
             }
         }
     }
 
-    if (
-        team1 !== data.tourney.manager.teamName.left &&
-        team2 !== data.tourney.manager.teamName.right
-    ) {
-        if (
-            data.tourney.manager.teamName.left !== "" &&
-            data.tourney.manager.teamName.right !== "" &&
-            tournamentDebugger === 0
-        ) {
+    if (team1 !== data.tourney.manager.teamName.left && team2 !== data.tourney.manager.teamName.right) {
+        if (data.tourney.manager.teamName.left !== "" && data.tourney.manager.teamName.right !== "" && tournamentDebugger === 0) {
             team1 = data.tourney.manager.teamName.left;
             team2 = data.tourney.manager.teamName.right;
         } else {
@@ -324,18 +280,8 @@ socket.onmessage = (event) => {
         leftScoreWidth = parseInt(getComputedStyle(playScoreLeft).width);
         rightScoreWidth = parseInt(getComputedStyle(playScoreRight).width);
 
-        leftOffset = -Math.sqrt(
-            Math.abs(
-                (deltaScore / maximumDelta) *
-                    (960 - leftScoreWidth) *
-                    (960 - leftScoreWidth)
-            )
-        );
-        rightOffset = Math.sqrt(
-            (deltaScore / maximumDelta) *
-                (960 - rightScoreWidth) *
-                (960 - rightScoreWidth)
-        );
+        leftOffset = -Math.sqrt(Math.abs((deltaScore / maximumDelta) * (960 - leftScoreWidth) * (960 - leftScoreWidth)));
+        rightOffset = Math.sqrt((deltaScore / maximumDelta) * (960 - rightScoreWidth) * (960 - rightScoreWidth));
 
         // console.log(rightOffset);
 
@@ -344,14 +290,8 @@ socket.onmessage = (event) => {
             playScoreLeft.className = "leadingScore";
             playScoreRight.className = "normalScore";
             if (-leftOffset >= leftScoreWidth / 2) {
-                if (-leftOffset < 960 - leftScoreWidth)
-                    playScoreLeft.style.transform = `translateX(${
-                        leftOffset + leftScoreWidth / 2
-                    }px)`;
-                else
-                    playScoreLeft.style.transform = `translateX(-${
-                        960 - leftScoreWidth
-                    }px)`;
+                if (-leftOffset < 960 - leftScoreWidth) playScoreLeft.style.transform = `translateX(${leftOffset + leftScoreWidth / 2}px)`;
+                else playScoreLeft.style.transform = `translateX(-${960 - leftScoreWidth}px)`;
             } else playScoreLeft.style.transform = `translateX(0)`;
             playScoreRight.style.transform = `translateX(0)`;
             deltaBarL.style.width = `${-leftOffset}px`;
@@ -370,14 +310,8 @@ socket.onmessage = (event) => {
             playScoreLeft.className = "normalScore";
             playScoreLeft.style.transform = `translateX(0)`;
             if (rightOffset >= rightScoreWidth / 2)
-                if (rightOffset < 960 - rightScoreWidth)
-                    playScoreRight.style.transform = `translateX(${
-                        rightOffset - rightScoreWidth / 2
-                    }px)`;
-                else
-                    playScoreRight.style.transform = `translateX(${
-                        960 - rightScoreWidth
-                    }px)`;
+                if (rightOffset < 960 - rightScoreWidth) playScoreRight.style.transform = `translateX(${rightOffset - rightScoreWidth / 2}px)`;
+                else playScoreRight.style.transform = `translateX(${960 - rightScoreWidth}px)`;
             else playScoreRight.style.transform = `translateX(0)`;
             deltaBarL.style.width = 0;
             deltaBarR.style.width = `${rightOffset}px`;
@@ -387,10 +321,7 @@ socket.onmessage = (event) => {
         if (chatLen != data.tourney.manager.chat.length) {
             // There's new chats that haven't been updated
             // console.log((data.tourney.manager.chat).length);
-            if (
-                chatLen == 0 ||
-                (chatLen > 0 && chatLen > data.tourney.manager.chat.length)
-            ) {
+            if (chatLen == 0 || (chatLen > 0 && chatLen > data.tourney.manager.chat.length)) {
                 // Starts from bottom
                 chats.innerHTML = "";
                 chatLen = 0;
@@ -414,16 +345,10 @@ socket.onmessage = (event) => {
                 chatText.setAttribute("class", "chatText");
 
                 chatTime.innerText = data.tourney.manager.chat[i].time;
-                chatName.innerText =
-                    data.tourney.manager.chat[i].name + ":\xa0";
+                chatName.innerText = data.tourney.manager.chat[i].name + ":\xa0";
                 chatText.innerText = data.tourney.manager.chat[i].messageBody;
 
-                if (
-                    data.tourney.manager.chat[i].messageBody.includes(
-                        "Next Pick"
-                    )
-                )
-                    togglePool(true);
+                if (data.tourney.manager.chat[i].messageBody.includes("Next Pick")) togglePool(true);
 
                 chatName.classList.add(tempClass);
 
@@ -447,7 +372,7 @@ socket.onmessage = (event) => {
 async function setAvatar(element, username) {
     const data = await getDataSet(username);
     if (data !== null) {
-        element.style.backgroundImage = `url("http://s.ppy.sh/a/${data.user_id}")`;
+        element.style.backgroundImage = `url("${data.avatar_url}")`;
     } else {
         element.style.backgroundImage = `url("./static/${element.id}.png")`;
     }
@@ -455,16 +380,7 @@ async function setAvatar(element, username) {
 
 async function getDataSet(name) {
     try {
-        const data = (
-            await axios.get("/get_user", {
-                baseURL: "https://osu.ppy.sh/api",
-                params: {
-                    k: api,
-                    u: name,
-                },
-            })
-        )["data"];
-        return data.length !== 0 ? data[0] : null;
+        return (await axios.get(`https://tryz.vercel.app/api/u/${name}`))?.data ?? null;
     } catch (error) {
         console.error(error);
     }
@@ -472,10 +388,7 @@ async function getDataSet(name) {
 
 async function iFrameInitiate() {
     let mappoolPicker = document.createElement("iframe");
-    mappoolPicker.setAttribute(
-        "src",
-        `./mappool`
-    );
+    mappoolPicker.setAttribute("src", `./mappool`);
     mappoolPicker.setAttribute("frameBorder", "0");
     mappoolPicker.setAttribute("name", `picker`);
     mappoolPicker.className = "mappoolPicker";
