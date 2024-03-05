@@ -1,37 +1,43 @@
 # VCL Tournament Overlay - Lazer edition by Try-Z
 
-This overlay is helpful for those that likes the look of Lazer overlay, but doesn't want to go through the complicated setup steps.
-It only include Gameplay & Mappool scene, but we might add winner scene in the future if we even care.
+This overlay is helpful for those that likes the look of Lazer overlay, but doesn't want to go through the complicated setup steps. As a bonus, this overlay has support for Accuracy win condition, which the default Lazer client cannot do as of the time this repo is updated.
+For the time being, only Gameplay and Mappool scene is included.
 
 [**How the overlay looks like (with a bit of CSS modification)**](https://www.twitch.tv/videos/1445278730?collection=vyL2iPlp4xYysw&t=00h11m56s)
 
 ## Setup guide:
-- Gosumemory installed (duh). Also OBS Studio is highly recommended due to the overlay was only tested on this. 
-- Download this repo as .zip, and extract to `static` folder of Gosumemory
+- Install Gosumemory (duh)
+- Download this repo as .zip and extract to `static` folder of Gosumemory
+- Rename either `index_acc.js` or `index_score.js` to `index.js`, depends on which win condition you are using.
 - Put your APIv1 key in `api.json`
-- Update mappool by changing IDs in `mappool\mappool.json`
+- Update mappool by changing IDs in `mappool\mappool.json`.
 - Change mod icons in `mappool\static` folder
 - Change background in `static` folder (`mp-bg` for Gameplay, `mp-bg2` for Mappool)
 
 ## Styling
 - Most colors can be found in `css\style.css`
-- For P1/P2 score, change hex color in `index.js` (Line 253 for P1 and line 266 for P2)
+- For P1/P2 score, change hex code in `index.js` (Line `253` for P1 and line `266` for P2)
 
 ## Overlay interaction (in OBS)
-- Add a browser source in OBS, size `2420x1080`
+- Add a browser source in OBS:
+	- size: `2420x1080`
+ 	- URL: `127.0.0.1:24050/vcl-tournament-overlay` 
 - Below the preview, you should see an `Interact` button. Click on that to interact with the overlay.
-
 - Picks: Left click for P1, right click for P2
 - Bans: Shift + Left click for P1, Shift + Right click for P2
 - Reset map status: Ctrl + Click
 
-Note: **Same as lazer, bans must be done manually. You will also have to select who will have first pick**
+***Note:** Same as Lazer, bans must be done manually. You will also have to select who will have first pick.*
 
-## Note
-- For the time being, to trigger the auto-switching between gameplay and mappool, the score announce must contain `Next Pick: ...` keyword (case sensitive). Of course with some code digging you can find where to change this
-- If the players' avatars are not visible, spam Refresh in OBS
-- This overlay only support 1v1 format, you are on your own to add support for TeamVS with icons
+## Known bug
+- Mappool is not changed after updating `mappool.json`. This can be fixed by:
+	- Updating `mappool.json` **BEFORE** starting Gosumemory
+	- Delete cache. This is located in `C:\Users\{YourUsername}\AppData\Roaming\obs-studio\plugin_config\obs-browser` (delete the whole folder). After doing so, refresh browser source.
 
-# We will not provide basic support (install guide, basic debug) for this overlay, so you are on your own. If you find any bug or need help with modifying other aspect of the overlay (e.g. change to acc win cond), contact `hoaq#6054` on Discord (or ping me in osu! Tournament Hub).
-
+## Additional notes
+- To trigger the auto-switching between gameplay and mappool, **the score announce message must contain `Next Pick: ...` phrase (case sensitive).** Of course with some code digging you can find where to change this.
+- If the players' avatars are not visible, spam Refresh in OBS.
+- **This overlay only support 1v1 format.** TeamVS could work, but there will be a default avatar as placeholder.
+___
+For additional support, DM `hoaq#6054` on Discord (or ping in osu! Tournament Hub).
 Credit is not required but it would help us :D 

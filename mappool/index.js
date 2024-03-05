@@ -3,21 +3,6 @@ window.addEventListener("contextmenu", (e) => e.preventDefault());
 // const queryString = window.location.search;
 // const urlParams = new URLSearchParams(queryString);
 
-const file = [];
-let api;
-async function getAPI() {
-    try {
-        const jsonData = await $.getJSON("../api.json");
-        jsonData.map((num) => {
-            file.push(num);
-        });
-        api = file[0].api;
-    } catch (error) {
-        console.error("Could not read JSON file", error);
-    }
-}
-getAPI();
-
 /*BackgroundCheck.init({
     targets: '.teamName',
     images: '#teamName'
@@ -290,7 +275,7 @@ async function setupBeatmaps() {
             });
         });
         const mapData = await getDataSet(beatmap.beatmapId);
-        bm.map.style.backgroundImage = `url('https://assets.ppy.sh/beatmaps/${mapData.beatmapset_id}/covers/cover.jpg')`;
+        bm.map.style.backgroundImage = `url('${mapData.coverURL}')`;
         bm.metadata.innerHTML = mapData.artist + " - " + mapData.title;
         bm.difficulty.innerHTML =
             `[${mapData.version}]` + "&emsp;&emsp;Mapper: " + mapData.creator;
@@ -300,16 +285,16 @@ async function setupBeatmaps() {
 
 async function getDataSet(beatmapID) {
     try {
-        const data = (
-            await axios.get("/get_beatmaps", {
-                baseURL: "https://osu.ppy.sh/api",
-                params: {
-                    k: api,
-                    b: beatmapID,
-                },
-            })
-        )["data"];
-        return data.length !== 0 ? data[0] : null;
+        const data = (await axios.get(`https://tryz.vercel.app/api/b/${beatmapID}`)).data ;
+        const diff = data.beatmaps.filter((diff) => diff.id === beatmapID).shift();
+
+        return {
+            coverURL: data.covers["cover@2x"],
+            artist: data.artist,
+            title: data.title,
+            version: diff.version,
+            creator: data.creator
+        }
     } catch (error) {
         console.error(error);
     }
