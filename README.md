@@ -9,12 +9,13 @@ For the time being, only Gameplay and Mappool scene is included.
 - Install Gosumemory (duh)
 - Download this repo as .zip and extract to `static` folder of Gosumemory
 - Rename either `index_acc.js` or `index_score.js` to `index.js`, depends on which win condition you are using.
-- Put your APIv1 key in `api.json`
 - Update mappool by changing IDs in `mappool\mappool.json`.
 - Change mod icons in `mappool\static` folder
 - Change background in `static` folder (`mp-bg` for Gameplay, `mp-bg2` for Mappool)
 
 ## Styling
+- **NEW** - There are 2 CSS files to choose whether you want team image / profile picture to show or not. See `css` folder and remove/rename `topBar.css` accordingly.
+	- The default `topBar.css` enables showing images, while the other one doesn't.
 - Most colors can be found in `css\style.css`
 - For P1/P2 score, change hex code in `index.js` (Line `253` for P1 and line `266` for P2)
 
@@ -37,7 +38,6 @@ For the time being, only Gameplay and Mappool scene is included.
 ## Additional notes
 - To trigger the auto-switching between gameplay and mappool, **the score announce message must contain `Next Pick: ...` phrase (case sensitive).** Of course with some code digging you can find where to change this.
 - If the players' avatars are not visible, spam Refresh in OBS.
-- **This overlay only support 1v1 format.** TeamVS could work, but there will be a default avatar as placeholder.
 ___
 For additional support, DM `hoaq#6054` on Discord (or ping in osu! Tournament Hub).
 Credit is not required but it would help us :D 
