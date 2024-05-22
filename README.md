@@ -1,7 +1,10 @@
-# VCL Tournament Overlay - Lazer edition by Try-Z
+# [DEPRECATED] VCL Tournament Overlay - Lazer edition by Try-Z
 
-This overlay is helpful for those that likes the look of Lazer overlay, but doesn't want to go through the complicated setup steps. As a bonus, this overlay has support for Accuracy win condition, which the default Lazer client cannot do as of the time this repo is updated.
-For the time being, only Gameplay and Mappool scene is included.
+# NOTICE
+This overlay is no longer maintained. It's recommended to use [**this overlay**](https://github.com/vncommunityleague/vcl-tournament-overlay-tosu/) instead.
+
+This overlay is helpful for those who likes the look of Lazer overlay, but don't want to go through the complicated setup steps. As a bonus, this overlay has support for Accuracy win condition, which the default Lazer client cannot do as of the time this repo is updated.
+For the time being, only Gameplay and Mappool scene are included.
 
 [**How the overlay looks like (with a bit of CSS modification)**](https://www.twitch.tv/videos/1445278730?collection=vyL2iPlp4xYysw&t=00h11m56s)
 
