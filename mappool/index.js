@@ -1,12 +1,9 @@
 window.addEventListener("contextmenu", (e) => e.preventDefault());
 
-// const queryString = window.location.search;
-// const urlParams = new URLSearchParams(queryString);
-
-/*BackgroundCheck.init({
-    targets: '.teamName',
-    images: '#teamName'
-});*/
+// ( aysnc () => {
+//     $.ajaxSetup({cache: false});
+//     let
+// })();
 
 // START
 let socket = new ReconnectingWebSocket("ws://127.0.0.1:24050/ws");
@@ -38,16 +35,16 @@ let pickState = document.getElementById("pickState");
 const beatmaps = new Set(); // Store beatmapID;
 
 socket.onopen = () => {
-    console.log("Successfully Connected");
+  console.log("Successfully Connected");
 };
 
 socket.onclose = (event) => {
-    console.log("Socket Closed Connection: ", event);
-    socket.send("Client Closed!");
+  console.log("Socket Closed Connection: ", event);
+  socket.send("Client Closed!");
 };
 
 socket.onerror = (error) => {
-    console.log("Socket Error: ", error);
+  console.log("Socket Error: ", error);
 };
 
 let tempUID;
@@ -73,70 +70,70 @@ let scoreRight = [];
 let tempLastPick = "Blue";
 
 const mods = {
-    NM: 0,
-    HD: 1,
-    HR: 2,
-    DT: 3,
-    FM: 4,
-    TB: 5,
+  NM: 0,
+  HD: 1,
+  HR: 2,
+  DT: 3,
+  FM: 4,
+  TB: 5,
 };
 
 class Beatmap {
-    constructor(mods, beatmapID, layerName) {
-        this.mods = mods;
-        this.beatmapID = beatmapID;
-        this.layerName = layerName;
-    }
-    generate() {
-        let mappoolContainer = document.getElementById(`${this.mods}`);
+  constructor(mods, beatmapID, layerName) {
+    this.mods = mods;
+    this.beatmapID = beatmapID;
+    this.layerName = layerName;
+  }
+  generate() {
+    let mappoolContainer = document.getElementById(`${this.mods}`);
 
-        this.clicker = document.createElement("div");
-        this.clicker.id = `${this.layerName}-clicker`;
+    this.clicker = document.createElement("div");
+    this.clicker.id = `${this.layerName}-clicker`;
 
-        mappoolContainer.appendChild(this.clicker);
-        let clickerObj = document.getElementById(this.clicker.id);
+    mappoolContainer.appendChild(this.clicker);
+    let clickerObj = document.getElementById(this.clicker.id);
 
-        this.map = document.createElement("div");
-        this.overlay = document.createElement("div");
-        this.metadata = document.createElement("div");
-        this.difficulty = document.createElement("div");
-        this.modIcon = document.createElement("div");
-        this.pickedStatus = document.createElement("div");
+    this.map = document.createElement("div");
+    this.overlay = document.createElement("div");
+    this.metadata = document.createElement("div");
+    this.difficulty = document.createElement("div");
+    this.modIcon = document.createElement("div");
+    this.pickedStatus = document.createElement("div");
 
-        this.map.id = `${this.layerName}-BG`;
-        this.overlay.id = `${this.layerName}-overlay`;
-        this.metadata.id = `${this.layerName}-metadata`;
-        this.difficulty.id = `${this.layerName}-difficulty`;
-        this.modIcon.id = `${this.layerName}-modicon`;
-        this.pickedStatus.id = `${this.layerName}-status`;
+    this.map.id = `${this.layerName}-BG`;
+    this.overlay.id = `${this.layerName}-overlay`;
+    this.metadata.id = `${this.layerName}-metadata`;
+    this.difficulty.id = `${this.layerName}-difficulty`;
+    this.modIcon.id = `${this.layerName}-modicon`;
+    this.pickedStatus.id = `${this.layerName}-status`;
 
-        this.metadata.setAttribute("class", "mapInfo");
-        this.difficulty.setAttribute("class", "mapInfo");
-        this.map.setAttribute("class", "map");
-        this.pickedStatus.setAttribute("class", "pickingStatus");
-        this.overlay.setAttribute("class", "overlay");
-        this.modIcon.setAttribute("class", "modIcon");
-        this.modIcon.style.backgroundImage = `url("./static/${this.mods}.png")`;
-        this.clicker.setAttribute("class", "clicker");
-        clickerObj.appendChild(this.map);
-        document.getElementById(this.map.id).appendChild(this.overlay);
-        document.getElementById(this.map.id).appendChild(this.metadata);
-        document.getElementById(this.map.id).appendChild(this.difficulty);
-        clickerObj.appendChild(this.pickedStatus);
-        clickerObj.appendChild(this.modIcon);
+    this.metadata.setAttribute("class", "mapInfo");
+    this.difficulty.setAttribute("class", "mapInfo");
+    this.map.setAttribute("class", "map");
+    this.pickedStatus.setAttribute("class", "pickingStatus");
+    this.overlay.setAttribute("class", "overlay");
+    this.modIcon.setAttribute("class", "modIcon");
+    this.modIcon.style.backgroundImage = `url("./static/${this.mods}.png")`;
+    this.clicker.setAttribute("class", "clicker");
+    clickerObj.appendChild(this.map);
+    document.getElementById(this.map.id).appendChild(this.overlay);
+    document.getElementById(this.map.id).appendChild(this.metadata);
+    document.getElementById(this.map.id).appendChild(this.difficulty);
+    clickerObj.appendChild(this.pickedStatus);
+    clickerObj.appendChild(this.modIcon);
 
-        this.clicker.style.transform = "translateY(0)";
-    }
-    grayedOut() {
-        this.overlay.style.opacity = "1";
-    }
-    PickedOn(type) {
-        this.pickedStatus.className = `picked${type}`;
-        this.overlay.style.opacity = "0.5";
-        this.metadata.style.opacity = "1";
-        this.difficulty.style.opacity = "1";
-        this.pickedStatus.innerHTML = "Picked";
-    }
+    this.clicker.style.transform = "translateY(0)";
+  }
+  grayedOut() {
+    this.overlay.style.opacity = "1";
+  }
+  PickedOn(type) {
+    this.pickedStatus.className = `picked${type}`;
+    this.overlay.style.opacity = "0.5";
+    this.metadata.style.opacity = "1";
+    this.difficulty.style.opacity = "1";
+    this.pickedStatus.innerHTML = "Picked";
+  }
 }
 
 let bestOfTemp;
@@ -144,174 +141,176 @@ let scoreVisibleTemp;
 let starsVisibleTemp;
 
 let team1 = "Red",
-    team2 = "Blue";
+  team2 = "Blue";
 
 socket.onmessage = async (event) => {
-    let data = JSON.parse(event.data);
+  let data = JSON.parse(event.data);
 
+  if (
+    team1 !== data.tourney.manager.teamName.left &&
+    team2 !== data.tourney.manager.teamName.right
+  ) {
     if (
-        team1 !== data.tourney.manager.teamName.left &&
-        team2 !== data.tourney.manager.teamName.right
+      data.tourney.manager.teamName.left !== "" &&
+      data.tourney.manager.teamName.right !== ""
     ) {
-        if (
-            data.tourney.manager.teamName.left !== "" &&
-            data.tourney.manager.teamName.right !== ""
-        ) {
-            team1 = data.tourney.manager.teamName.left;
-            team2 = data.tourney.manager.teamName.right;
-        }
+      team1 = data.tourney.manager.teamName.left;
+      team2 = data.tourney.manager.teamName.right;
     }
+  }
 
-    if (!hasSetup) setupBeatmaps();
+  if (!hasSetup) setupBeatmaps();
 
-    if (tempMapID !== data.menu.bm.id) {
-        tempMapID = data.menu.bm.id;
-        pickedOnManual(tempMapID);
-    }
+  if (tempMapID !== data.menu.bm.id) {
+    tempMapID = data.menu.bm.id;
+    pickedOnManual(tempMapID);
+  }
 
-    if (teamNameLeftTemp !== data.tourney.manager.teamName.left) {
-        teamNameLeftTemp = data.tourney.manager.teamName.left;
-        pickButtonR.innerHTML = teamNameLeftTemp;
-    }
-    if (teamNameRightTemp !== data.tourney.manager.teamName.right) {
-        teamNameRightTemp = data.tourney.manager.teamName.right;
-        pickButtonB.innerHTML = teamNameRightTemp;
-    }
+  if (teamNameLeftTemp !== data.tourney.manager.teamName.left) {
+    teamNameLeftTemp = data.tourney.manager.teamName.left;
+    pickButtonR.innerHTML = teamNameLeftTemp;
+  }
+  if (teamNameRightTemp !== data.tourney.manager.teamName.right) {
+    teamNameRightTemp = data.tourney.manager.teamName.right;
+    pickButtonB.innerHTML = teamNameRightTemp;
+  }
 };
 
 pickButtonR.addEventListener("click", () => {
-    pickState.innerHTML = "First Team to pick: " + pickButtonR.innerHTML;
-    tempLastPick = "Blue";
+  pickState.innerHTML = "First Team to pick: " + pickButtonR.innerHTML;
+  tempLastPick = "Blue";
 });
 
 pickButtonB.addEventListener("click", () => {
-    pickState.innerHTML = "First Team to pick: " + pickButtonB.innerHTML;
-    tempLastPick = "Red";
+  pickState.innerHTML = "First Team to pick: " + pickButtonB.innerHTML;
+  tempLastPick = "Red";
 });
 
 async function setupBeatmaps() {
-    hasSetup = true;
+  hasSetup = true;
 
-    const modsCount = {
-        NM: 0,
-        HD: 0,
-        HR: 0,
-        DT: 0,
-        FM: 0,
-        TB: 0,
-    };
+  const modsCount = {
+    NM: 0,
+    HD: 0,
+    HR: 0,
+    DT: 0,
+    FM: 0,
+    TB: 0,
+  };
 
-    const bms = [];
-    try {
-        const jsonData = await $.getJSON(`beatmaps.json`);
-        jsonData.map((beatmap) => {
-            bms.push(beatmap);
-        });
-    } catch (error) {
-        console.error("Could not read JSON file", error);
-    }
-
-    (function countMods() {
-        bms.map((beatmap) => {
-            modsCount[beatmap.mods]++;
-        });
-    })();
-
-    let row = -1;
-    let preMod = 0;
-    let colIndex = 0;
-    bms.map(async (beatmap, index) => {
-        if (beatmap.mods !== preMod || colIndex % 3 === 0) {
-            preMod = beatmap.mods;
-            colIndex = 0;
-            row++;
-        }
-        const bm = new Beatmap(
-            beatmap.mods,
-            beatmap.beatmapId,
-            `id-${beatmap.beatmapId}`
-        );
-        bm.generate();
-        bm.clicker.onmouseover = function () {
-            bm.clicker.style.transform = "translateY(-5px)";
-        };
-        bm.clicker.onmouseleave = function () {
-            bm.clicker.style.transform = "translateY(0px)";
-        };
-        bm.clicker.addEventListener("mousedown", function () {
-            bm.clicker.addEventListener("click", function (event) {
-                if (event.shiftKey) {
-                    bm.pickedStatus.className = "bannedRed";
-                    bm.overlay.style.opacity = "0.8";
-                    bm.metadata.style.opacity = "0.3";
-                    bm.difficulty.style.opacity = "0.3";
-                    bm.pickedStatus.innerHTML = `Banned by ${team1}`;
-                } else if (event.ctrlKey) {
-                    bm.overlay.style.opacity = "0.5";
-                    bm.metadata.style.opacity = "1";
-                    bm.difficulty.style.opacity = "1";
-                    bm.pickedStatus.className = "pickedStatus";
-                    bm.pickedStatus.innerHTML = "";
-                } else {
-                    bm.PickedOn("Red");
-                }
-            });
-            bm.clicker.addEventListener("contextmenu", function (event) {
-                if (event.shiftKey) {
-                    bm.pickedStatus.className = "bannedBlue";
-                    bm.overlay.style.opacity = "0.8";
-                    bm.metadata.style.opacity = "0.3";
-                    bm.difficulty.style.opacity = "0.3";
-                    bm.pickedStatus.innerHTML = `Banned by ${team2}`;
-                } else if (event.ctrlKey) {
-                    bm.overlay.style.opacity = "0.5";
-                    bm.metadata.style.opacity = "1";
-                    bm.difficulty.style.opacity = "1";
-                    bm.pickedStatus.className = "pickedStatus";
-                    bm.pickedStatus.innerHTML = "";
-                } else {
-                    bm.PickedOn("Blue");
-                }
-            });
-        });
-        const mapData = await getDataSet(beatmap.beatmapId);
-        bm.map.style.backgroundImage = `url('${mapData.coverURL}')`;
-        bm.metadata.innerHTML = mapData.artist + " - " + mapData.title;
-        bm.difficulty.innerHTML =
-            `[${mapData.version}]` + "&emsp;&emsp;Mapper: " + mapData.creator;
-        beatmaps.add(bm);
+  const bms = [];
+  try {
+    $.ajaxSetup({ cache: false });
+    const jsonData = await $.getJSON(`beatmaps.json`);
+    jsonData.map((beatmap) => {
+      bms.push(beatmap);
     });
+  } catch (error) {
+    console.error("Could not read JSON file", error);
+  }
+
+  (function countMods() {
+    bms.map((beatmap) => {
+      modsCount[beatmap.mods]++;
+    });
+  })();
+
+  let row = -1;
+  let preMod = 0;
+  let colIndex = 0;
+  bms.map(async (beatmap, index) => {
+    if (beatmap.mods !== preMod || colIndex % 3 === 0) {
+      preMod = beatmap.mods;
+      colIndex = 0;
+      row++;
+    }
+    const bm = new Beatmap(
+      beatmap.mods,
+      beatmap.beatmapId,
+      `id-${beatmap.beatmapId}`
+    );
+    bm.generate();
+    bm.clicker.onmouseover = function () {
+      bm.clicker.style.transform = "translateY(-5px)";
+    };
+    bm.clicker.onmouseleave = function () {
+      bm.clicker.style.transform = "translateY(0px)";
+    };
+    bm.clicker.addEventListener("mousedown", function () {
+      bm.clicker.addEventListener("click", function (event) {
+        if (event.shiftKey) {
+          bm.pickedStatus.className = "bannedRed";
+          bm.overlay.style.opacity = "0.8";
+          bm.metadata.style.opacity = "0.3";
+          bm.difficulty.style.opacity = "0.3";
+          bm.pickedStatus.innerHTML = `Banned by ${team1}`;
+        } else if (event.ctrlKey) {
+          bm.overlay.style.opacity = "0.5";
+          bm.metadata.style.opacity = "1";
+          bm.difficulty.style.opacity = "1";
+          bm.pickedStatus.className = "pickedStatus";
+          bm.pickedStatus.innerHTML = "";
+        } else {
+          bm.PickedOn("Red");
+        }
+      });
+      bm.clicker.addEventListener("contextmenu", function (event) {
+        if (event.shiftKey) {
+          bm.pickedStatus.className = "bannedBlue";
+          bm.overlay.style.opacity = "0.8";
+          bm.metadata.style.opacity = "0.3";
+          bm.difficulty.style.opacity = "0.3";
+          bm.pickedStatus.innerHTML = `Banned by ${team2}`;
+        } else if (event.ctrlKey) {
+          bm.overlay.style.opacity = "0.5";
+          bm.metadata.style.opacity = "1";
+          bm.difficulty.style.opacity = "1";
+          bm.pickedStatus.className = "pickedStatus";
+          bm.pickedStatus.innerHTML = "";
+        } else {
+          bm.PickedOn("Blue");
+        }
+      });
+    });
+    const mapData = await getDataSet(beatmap.beatmapId);
+    bm.map.style.backgroundImage = `url('${mapData.coverURL}')`;
+    bm.metadata.innerHTML = mapData.artist + " - " + mapData.title;
+    bm.difficulty.innerHTML =
+      `[${mapData.version}]` + "&emsp;&emsp;Mapper: " + mapData.creator;
+    beatmaps.add(bm);
+  });
 }
 
 async function getDataSet(beatmapID) {
-    try {
-        const data = (await axios.get(`https://tryz.vercel.app/api/b/${beatmapID}`)).data ;
-        const diff = data.beatmaps.filter((diff) => diff.id === beatmapID).shift();
+  try {
+    const data = (await axios.get(`https://tryz.vercel.app/api/b/${beatmapID}`))
+      .data;
+    const diff = data.beatmaps.filter((diff) => diff.id === beatmapID).shift();
 
-        return {
-            coverURL: data.covers["cover@2x"],
-            artist: data.artist,
-            title: data.title,
-            version: diff.version,
-            creator: data.creator
-        }
-    } catch (error) {
-        console.error(error);
-    }
+    return {
+      coverURL: data.covers["cover@2x"],
+      artist: data.artist,
+      title: data.title,
+      version: diff.version,
+      creator: data.creator,
+    };
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 pickedOnManual = (id) => {
-    tempLastPick = tempLastPick === "Red" ? "Blue" : "Red";
-    if (document.getElementById(`id-${id}-clicker`)) {
-        let pickedStatus = document.getElementById(`id-${id}-status`);
-        let overlay = document.getElementById(`id-${id}-overlay`);
-        let metadata = document.getElementById(`id-${id}-metadata`);
-        let difficulty = document.getElementById(`id-${id}-difficulty`);
+  tempLastPick = tempLastPick === "Red" ? "Blue" : "Red";
+  if (document.getElementById(`id-${id}-clicker`)) {
+    let pickedStatus = document.getElementById(`id-${id}-status`);
+    let overlay = document.getElementById(`id-${id}-overlay`);
+    let metadata = document.getElementById(`id-${id}-metadata`);
+    let difficulty = document.getElementById(`id-${id}-difficulty`);
 
-        pickedStatus.className = `picked${tempLastPick}`;
-        overlay.style.opacity = "0.5";
-        metadata.style.opacity = "1";
-        difficulty.style.opacity = "1";
-        pickedStatus.innerHTML = "Picked";
-    }
+    pickedStatus.className = `picked${tempLastPick}`;
+    overlay.style.opacity = "0.5";
+    metadata.style.opacity = "1";
+    difficulty.style.opacity = "1";
+    pickedStatus.innerHTML = "Picked";
+  }
 };

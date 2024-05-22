@@ -383,7 +383,6 @@ async function getDataSet(name) {
         return (await axios.get(`https://tryz.vercel.app/api/u/${name}`))?.data ?? null;
     } catch (error) {
         console.error(error);
-        return null;
     }
 }
 
